@@ -37,7 +37,7 @@ async createThought(req, res) {
 
         const user = await User.findOneAndUpdate(
             {_id: req.body.userId},
-            { $push: {thoughts: {_id: thought._id} }}
+            { $push: {thoughts: thought._id }}
         )
 
         res.json(thought);
@@ -111,7 +111,7 @@ async deleteThought(req, res) {
     try {
         const thought = await Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reactions: { reactionId: req.body.reactionId } } },
+            { $pull: { reactions: req.body.reactionId } },
             { runValidators: true, new: true }
         );
 

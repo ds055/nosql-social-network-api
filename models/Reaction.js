@@ -18,7 +18,7 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            // TODO: * Use a getter method to format the timestamp on query
+            get: formattedDate
         },
     },
     {
@@ -28,10 +28,9 @@ const reactionSchema = new Schema(
     }
 )
 
-
-
-thoughtsSchema.virtual('timestamp').get(function() {
-    
-})
+function formattedDate(date){
+    const newDate = date.toLocaleString();
+    return newDate;
+}
 
 module.exports = reactionSchema;

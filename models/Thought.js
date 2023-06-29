@@ -1,4 +1,4 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction')
 
 const thoughtsSchema = new Schema(
@@ -16,7 +16,7 @@ const thoughtsSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            // TODO: * Use a getter method to format the timestamp on query
+            get: formattedDate
         },
         reactions: [reactionSchema],
     },
@@ -28,6 +28,11 @@ const thoughtsSchema = new Schema(
         id: false,
     }
 )
+
+function formattedDate(date){
+    const newDate = date.toLocaleString();
+    return newDate;
+}
 
 thoughtsSchema.virtual('reactionCount').get(function() {
     return this.reactions.length
