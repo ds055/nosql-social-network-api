@@ -18,6 +18,7 @@ const reactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
+            // TODO: * Use a getter method to format the timestamp on query
         },
     },
     {
@@ -27,7 +28,7 @@ const reactionSchema = new Schema(
     }
 )
 
-// TODO: * Use a getter method to format the timestamp on query
+
 
 thoughtsSchema.virtual('timestamp').get(function() {
     

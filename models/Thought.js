@@ -3,10 +3,6 @@ const reactionSchema = require('./Reaction')
 
 const thoughtsSchema = new Schema(
     {
-        thoughtId: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
-        },
         thoughtText: {
             type: String,
             required: true, 
@@ -20,6 +16,7 @@ const thoughtsSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
+            // TODO: * Use a getter method to format the timestamp on query
         },
         reactions: [reactionSchema],
     },
@@ -34,12 +31,6 @@ const thoughtsSchema = new Schema(
 
 thoughtsSchema.virtual('reactionCount').get(function() {
     return this.reactions.length
-})
-
-// TODO: * Use a getter method to format the timestamp on query
-
-thoughtsSchema.virtual('timestamp').get(function() {
-    
 })
 
 const Thought = model('thought', thoughtsSchema);
