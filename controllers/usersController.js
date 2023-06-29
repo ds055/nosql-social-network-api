@@ -116,7 +116,7 @@ try {
 }},
 
 // DELETE to remove a friend from a user's friend list
-async removeAssignment(req, res) {
+async deleteFriend(req, res) {
     try {
         const user = await User.findOneAndUpdate(
             { _id: req.params.userId },
