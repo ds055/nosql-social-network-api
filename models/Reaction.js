@@ -6,6 +6,7 @@ const reactionSchema = new Schema(
             type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId(),
         },
+        // max length of reaction set to 280 characters
         reactionBody: {
             type: String,
             required: true, 
@@ -15,6 +16,7 @@ const reactionSchema = new Schema(
             type: String,
             required: true,
         },
+        // date returned formatted on query
         createdAt: {
             type: Date,
             default: Date.now,
@@ -24,10 +26,12 @@ const reactionSchema = new Schema(
     {
         toJSON: {
             getters: true,
-        }
+        },
+        id: false,
     }
 )
 
+// formats date Month, Day, year, time
 function formattedDate(date){
     const newDate = date.toLocaleString();
     return newDate;
